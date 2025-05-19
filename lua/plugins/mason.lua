@@ -10,6 +10,10 @@ return {
       'shfmt',
     },
   },
+  opts = function(_, opts)
+    opts.ensure_installed = opts.ensure_installed or {}
+    table.insert(opts.ensure_installed, 'js-debug-adapter')
+  end,
   ---@param opts MasonSettings | {ensure_installed: string[]}
   config = function(_, opts)
     require('mason').setup(opts)

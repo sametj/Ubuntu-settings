@@ -68,6 +68,7 @@ opt.fillchars = {
   diff = '╱',
   eob = ' ',
 }
+vim.g.python3_host_prog = vim.fn.expand '~/.venvs/nvim/bin/python'
 opt.foldlevel = 99
 opt.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
 opt.formatoptions = 'jcroqlnt' -- tcqj
