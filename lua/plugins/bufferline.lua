@@ -13,12 +13,12 @@ return {
     { '[B', '<cmd>BufferLineMovePrev<cr>', desc = 'Move buffer prev' },
     { ']B', '<cmd>BufferLineMoveNext<cr>', desc = 'Move buffer next' },
   },
-  opts = {
-    options = {
-      -- stylua: ignore
-      close_command = function(n) Snacks.bufdelete(n) end,
-      -- stylua: ignore
-      right_mouse_command = function(n) Snacks.bufdelete(n) end,
+  opts = function(_, opts)
+    opts.options = {
+    -- stylua: ignore
+    close_command = function(n) Snacks.bufdelete(n) end,
+    -- stylua: ignore
+    right_mouse_command = function(n) Snacks.bufdelete(n) end,
       diagnostics = 'nvim_lsp',
       always_show_bufferline = false,
       diagnostics_indicator = function(_, _, diag)
@@ -41,15 +41,14 @@ return {
       get_element_icon = function(opts)
         return LazyVim.config.icons.ft[opts.filetype]
       end,
-    },
-  },
-  opts = function(_, opts)
+    }
+
+    -- Catppuccin integration
     if (vim.g.colors_name or ''):find 'catppuccin' then
       opts.highlights = require('catppuccin.groups.integrations.bufferline').get()
     end
-  end,
 
-  opts = function()
+    -- Edgy sidebar offset override
     local Offset = require 'bufferline.offset'
     if not Offset.edgy then
       local get = Offset.get
