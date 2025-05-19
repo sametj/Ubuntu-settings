@@ -2,7 +2,8 @@
 
 -- DO NOT USE `LazyVim.safe_keymap_set` IN YOUR OWN CONFIG!!
 -- use `vim.keymap.set` instead
-local map = LazyVim.safe_keymap_set
+local map = vim.keymap.set
+local opts = { silent = true, noremap = true }
 
 -- better up/down
 map({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
@@ -70,8 +71,8 @@ map('i', '.', '.<c-g>u')
 map('i', ';', ';<c-g>u')
 
 -- Use JK to exit to normal mode
-map({ 'i' }, 'jk', '<ESC>', { silent = true, noremap = true })
-map({ 'i' }, 'kj', '<ESC>', { silent = true, noremap = true })
+map({ 'i' }, 'jk', '<ESC>', opts)
+map({ 'i' }, 'kj', '<ESC>', opts)
 
 -- save file
 map({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
@@ -136,6 +137,7 @@ map('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
 
 -- stylua: ignore start
 
+
 -- toggle options
 LazyVim.format.snacks_toggle():map("<leader>uf")
 LazyVim.format.snacks_toggle(true):map("<leader>uF")
@@ -194,6 +196,11 @@ map("n", "<c-_>",      function() Snacks.terminal(nil, { cwd = LazyVim.root() })
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
+--Make gg to top also jump to start of line and G go to end of file and end of line
+map('n', 'gg', 'gg0', { silent = true })
+map({ "n", "v" }, "G", "G$", { desc = "Go to end of file and end of line" })
+
+
 -- windows
 map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
@@ -210,7 +217,8 @@ map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
--- native snippets. only needed on < 0.11, as 0.11 creates these by default
+
+ -- native snippets. only needed on < 0.11, as 0.11 creates these by default
 if vim.fn.has("nvim-0.11") == 0 then
   map("s", "<Tab>", function()
     return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
@@ -221,4 +229,4 @@ if vim.fn.has("nvim-0.11") == 0 then
 end
 
 -- Normal mode keybindings
-map({'n'}, ';', ':', {silent=true, noremap= true})
+map({'n'}, ';', ':',opts)
