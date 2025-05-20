@@ -2,18 +2,6 @@ return {
   'lewis6991/gitsigns.nvim',
   event = 'LazyFile',
   opts = {
-    function()
-      Snacks.toggle({
-        name = 'Git Signs',
-        get = function()
-          return require('gitsigns.config').config.signcolumn
-        end,
-        set = function(state)
-          require('gitsigns').toggle_signs(state)
-        end,
-      }):map '<leader>uG'
-    end,
-
     signs = {
       add = { text = '▎' },
       change = { text = '▎' },
@@ -64,6 +52,25 @@ return {
       map("n", "<leader>ghd", gs.diffthis, "Diff This")
       map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+      -- stylua: ignore end
     end,
   },
+  config = function(_, opts)
+    require('gitsigns').setup(opts)
+
+    local ok, Snacks = pcall(require, 'snacks')
+    if ok and Snacks and Snacks.toggle then
+      Snacks.toggle({
+        name = 'Git Signs',
+        get = function()
+          return require('gitsigns.config').config.signcolumn
+        end,
+        set = function(state)
+          require('gitsigns').toggle_signs(state)
+        end,
+      }):map '<leader>uG'
+    else
+      vim.notify("Warning: Snacks not found or doesn't support toggle, skipping Git Signs toggle", vim.log.levels.WARN)
+    end
+  end,
 }

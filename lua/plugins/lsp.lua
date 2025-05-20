@@ -1,6 +1,6 @@
 return {
   'neovim/nvim-lspconfig',
-  event = 'BufReadPre', -- use a valid lazy load event
+  event = 'BufReadPre',
   dependencies = {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
@@ -76,10 +76,10 @@ return {
     },
     setup = {
       tsserver = function()
-        return true -- disables tsserver setup (because ts_ls is preferred)
+        return true -- disables tsserver setup
       end,
       ts_ls = function()
-        return true -- disables ts_ls setup (you disable both here)
+        return true -- disables ts_ls setup
       end,
       vtsls = function(_, opts)
         -- Attach your custom commands and extend settings here if needed

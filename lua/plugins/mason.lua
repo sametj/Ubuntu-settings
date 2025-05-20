@@ -4,23 +4,35 @@ return {
   keys = { { '<leader>cm', '<cmd>Mason<cr>', desc = 'Mason' } },
   build = ':MasonUpdate',
   opts_extend = { 'ensure_installed' },
-  opts = {
-    ensure_installed = {
-      'stylua',
-      'shfmt',
-    },
-  },
   opts = function(_, opts)
-    opts.ensure_installed = opts.ensure_installed or {}
-    table.insert(opts.ensure_installed, 'js-debug-adapter')
+    opts.ensure_installed = opts.ensure_installed
+      or {
+        'stylua',
+        'shfmt',
+
+        -- Docker tooling
+        'dockerfile-language-server',
+
+        -- Web tooling (common)
+        'eslint_d',
+        'prettierd',
+
+        -- Python tooling
+        'pyright',
+        'black',
+        'isort',
+        'pylint',
+
+        -- Add your js-debug adapter too
+        'js-debug-adapter',
+      }
+    return opts
   end,
-  ---@param opts MasonSettings | {ensure_installed: string[]}
   config = function(_, opts)
     require('mason').setup(opts)
     local mr = require 'mason-registry'
     mr:on('package:install:success', function()
       vim.defer_fn(function()
-        -- trigger FileType event to possibly load this newly installed LSP server
         require('lazy.core.handler.event').trigger {
           event = 'FileType',
           buf = vim.api.nvim_get_current_buf(),
