@@ -40,6 +40,7 @@ return {
       treesitter = true,
       treesitter_context = true,
       which_key = true,
+      lazygit = true,
     },
   },
   specs = {
