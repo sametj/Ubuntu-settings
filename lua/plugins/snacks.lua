@@ -1,7 +1,13 @@
 return {
   'snacks.nvim',
   opts = {
-    indent = { enabled = true },
+    picker = {
+      sources = {
+        explorer = {
+          layout = { layout = { position = 'right' } },
+        },
+      },
+    },
     input = { enabled = true },
     notifier = { enabled = true },
     scope = { enabled = true },
