@@ -1,5 +1,8 @@
 return {
+  'rebelot/kanagawa.nvim',
+  'ellisonleao/gruvbox.nvim',
   'catppuccin/nvim',
+  { 'bluz71/vim-moonfly-colors', name = 'moonfly', lazy = false, priority = 1000 },
   lazy = true,
   name = 'catppuccin',
   opts = {
