@@ -23,6 +23,10 @@ return {
         name = 'personal',
         path = '/mnt/teejay/Obsidian-vault',
       },
+      {
+        name = 'work',
+        path = '/mnt/c/Users/mojames/Documents/work',
+      },
     },
 
     completion = {
