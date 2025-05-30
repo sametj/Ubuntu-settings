@@ -7,6 +7,7 @@ return {
   },
   opts = {
     servers = {
+      sqls = {},
       tsserver = { enabled = false },
       ts_ls = { enabled = false },
       vtsls = {
@@ -40,7 +41,7 @@ return {
           {
             'gD',
             function()
-              local params = vim.lsp.util.make_position_params()
+              local params = vim.lsp.util.make_position_params(0, 'utf-32')
               LazyVim.lsp.execute {
                 command = 'typescript.goToSourceDefinition',
                 arguments = { params.textDocument.uri, params.position },
