@@ -50,6 +50,12 @@ return {
       'vimdoc',
       'xml',
       'yaml',
+      'latex',
+      'norg',
+      'scss',
+      'svelte',
+      'typst',
+      'vue',
     },
     incremental_selection = {
       enable = true,
