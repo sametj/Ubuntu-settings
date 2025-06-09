@@ -6,6 +6,18 @@ return {
 
     vim.o.laststatus = vim.g.lualine_laststatus
 
+    vim.api.nvim_set_hl(
+      0,
+      'StatusLine',
+      (function()
+        local theme = require('lualine').get_config().options.theme
+        if type(theme) == 'string' then
+          theme = require('lualine.themes.' .. theme)
+        end
+        return { fg = theme.normal.c.fg, bg = theme.normal.c.bg }
+      end)()
+    )
+
     local opts = {
       options = {
         theme = 'auto',
