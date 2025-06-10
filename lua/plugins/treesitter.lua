@@ -13,6 +13,7 @@ return {
     require('lazy.core.loader').add_to_rtp(plugin)
     require 'nvim-treesitter.query_predicates'
   end,
+  vim.treesitter.language.register('html', 'razor'),
   cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
   keys = {
     { '<c-space>', desc = 'Increment Selection' },
@@ -56,6 +57,7 @@ return {
       'svelte',
       'typst',
       'vue',
+      'c_sharp',
     },
     incremental_selection = {
       enable = true,

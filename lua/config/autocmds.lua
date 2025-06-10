@@ -124,3 +124,17 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
   end,
 })
+
+-- Razor
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.razor',
+  command = 'setfiletype razor',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'razor',
+  callback = function()
+    vim.cmd 'syntax include @csharp syntax/cs.vim'
+    vim.cmd 'syntax region razorCsharpCode start=/@{/ end=/}/ contains=@csharp keepend'
+  end,
+})

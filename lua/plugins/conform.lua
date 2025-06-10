@@ -39,6 +39,7 @@ return {
       lsp_format = 'fallback',
     },
     formatters_by_ft = {
+      cs = { 'csharpier' },
       lua = { 'stylua' },
       javascript = { 'prettier' },
       typescript = { 'prettier' },

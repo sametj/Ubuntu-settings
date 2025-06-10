@@ -25,6 +25,9 @@ return {
 
         -- Add your js-debug adapter too
         'js-debug-adapter',
+
+        -- c#
+        'omnisharp',
       }
     return opts
   end,

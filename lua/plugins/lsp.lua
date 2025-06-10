@@ -1,3 +1,4 @@
+local omnisharp = require 'lazyvim.plugins.extras.lang.omnisharp'
 return {
   'neovim/nvim-lspconfig',
   event = 'BufReadPre',
@@ -7,6 +8,12 @@ return {
   },
   opts = {
     servers = {
+      omnisharp = {
+        enable_edtitorconfig_support = true,
+        enable_roslyn_analyzers = true,
+        organize_imports_on_format = true,
+        enable_import_completions = true,
+      },
       sqls = {},
       tsserver = { enabled = false },
       ts_ls = { enabled = false },
